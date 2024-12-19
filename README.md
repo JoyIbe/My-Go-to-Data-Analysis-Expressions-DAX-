@@ -73,8 +73,22 @@ YoY =
     RETURN 
         _direction & " " & FORMAT(_percentChange, "##.##%") & " " & "vs PY"
 ```
+
+3. ### Custom KPI conditional formatting
    
-3. ### Dax for creating Agegroup Column
+``` dax
+Eg Rev:
+RevYoYColor = 
+    VAR
+        _difference = [Total Rev]- [PY Rev Org]
+    RETURN 
+        SWITCH(
+            TRUE(),
+            _difference > 0, "#348939",
+            _difference < 0, "#9B1D1E",
+            "#000000")
+```
+4. ### Dax for creating Agegroup Column
 
 ``` dax
 Age Group = 
@@ -91,7 +105,7 @@ SWITCH(
 ```
 
 
-4. ### Searching for total and percentage of a particular variable
+5. ### Searching for total and percentage of a particular variable
    
  ``` dax
 Product x = 
@@ -109,7 +123,7 @@ RETURN FORMAT( DIVIDE('Table_name'[x], _TotalRevenue, 0), "0%"
  )
 ```
 
-5. ###  Previous Year
+6. ###  Previous Year
 
 ``` dax
     CALCULATE( SUM('Table_name'[sales]),
